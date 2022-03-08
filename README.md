@@ -1,2 +1,1 @@
-# USO_DO_PROJETO_GENERATIVO_COMO_FERRAMENTA_DE_BUSCA_DE_SOLU--ES_DE_PROJETO
- 
+# Uso do projeto generativo como ferramenta de busca de soluções de projeto
