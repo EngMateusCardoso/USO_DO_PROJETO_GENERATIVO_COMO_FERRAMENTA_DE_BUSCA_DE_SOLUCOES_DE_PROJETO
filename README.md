@@ -34,6 +34,7 @@ Considering automation and optimization methods improvement, this project dedica
 
 ## Projeto
 
+
 ## Ferramentas
 
 ## O Algoritmo
