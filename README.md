@@ -51,7 +51,84 @@ M2 (kNm) |	100 |	80
 Construiu-se uma estrutura paramétrica para que, ao ser executada, o projetista faça a seleção da viga que será explorada, suas restrições geométricas (limitações de altura de largura) e a escolha do solucionador. Após o processamento são apresentadas pelo algoritmo as opções de projeto e depois da exploração das opções o algoritmo integra a opção escolhida ao restante do projeto.
 ### Aplicação
 
-### Resultados
+Após exportada a estrutura fica disponível na biblioteca do Generative Design. A biblioteca é acessada na aba Gerenciar, no ambiente de Projeto generativo, pelo botão de Criar estudo, Figura 39:
+<br/><br/>Figura 39 - Criar estudo
+![image](https://user-images.githubusercontent.com/93548287/162081533-4373d039-3dca-469d-a5c3-6cf30a3a91cb.png)
+<br/><br/> 
+Após selecionar o exemplo de aplicação, deve-se escolher o tipo de solucionador utilizado. O Generative Design oferece as opções apresentadas na Figura 40. Neste exemplo é utilizado método de otimizar.
+<br/><br/>Figura 40 – Opções de solucionador
+![image](https://user-images.githubusercontent.com/93548287/162081747-058669e6-fd7e-470e-a4f9-921252f829b4.png)
+<br/><br/>
+Como dito no item 3.2.1 os nós de seleção marcados como ‘de entrada’ são variáveis de estudo, desse modo, na caixa do estudo aparece os botões de seleção referente a cada um destes nós. Após clicar no botão ‘selecionar’, Figura 41, o projetista seleciona na interface do Revit a viga que será explorada e as faces que a limitam.  <br/><br/> Figura 41 - Seleção no modelo
+![image](https://user-images.githubusercontent.com/93548287/162081764-4c325d62-5c7f-4cd3-ab2f-92f411fbf95d.png)
+<br/><br/>
+Em seguida o projetista deve definir as metas do estudo, Figura 42. Todos os nós marcados como ‘de saída’ descritos no item 3.2.3 vão aparecer como opções de otimização e restrição. Neste trabalho foram feitos três diferentes estudos: o primeiro com apenas um objetivo de minimizar o custo da viga, o segundo de dois objetivos que minimiza a flecha total também e o terceiro com três objetivos que adicionalmente minimiza o comprimento total de armadura longitudinal utilizada.
+ <br/><br/>Figura 42 - Metas do estudo com dois objetivos
+ ![image](https://user-images.githubusercontent.com/93548287/162081837-e0a685e0-04d3-42ad-81b4-883379920e44.png)
+ <br/><br/>
+A definição das restrições segue os limites apresentados no item 3.2.3(do relatório). Observe que, as restrições podem ser aplicadas antes do processamento como na Figura 43 ou após o processamento com a filtragem dos resultados. <br/>
+Se aplicados antes do processamento o NSGA-II vai desencorajar a exploração de regiões promissoras do espaço de projeto que não atenderem as restrições, já filtrar as opções após o processamento permite a exploração do espaço de projeto sem restrições. Observou-se que o modelo apresentou poucas opções de projeto que não atendem restrições, por isso, optou-se por aplicar as condições de restrições com os filtros após o processamento.
+ <br/><br/> Figura 43 - Definição das restrições
+![image](https://user-images.githubusercontent.com/93548287/162081869-2ab760c2-6700-4689-a04d-ffc4bf7934aa.png)
+  <br/><br/>
+Por fim, na configuração de geração, o projetista define o tamanho da população de cada geração e o número de gerações do estudo, neste projeto, inicialmente foram usadas as configurações padrão do Generative Design, Figura 44.
+ <br/><br/>Figura 44 - Configurações da geração
+![image](https://user-images.githubusercontent.com/93548287/162081906-e4457e82-1ab1-4d5e-b202-b2ec7ffb949d.png)
+  <br/><br/>
+Nos resultados do Generative Design são apresentadas as opções de projetos e os gráficos. As opções de projeto, ficam na parte superior a esquerda e podem ser apresentadas em grade como na Figura 45 ou em lista como na Figura 46. Já os gráficos, podem ser apresentados em gráficos de coordenadas paralelas ou gráfico de dispersão, Figura 45 e 46 respectivamente. Qualquer opção de projeto selecionada é imediatamente detalhada no lado direito. 
+<br/><br/>Figura 45 - Resultados modelo 1
+![image](https://user-images.githubusercontent.com/93548287/162081938-7c503993-9d51-4552-9c11-490ff3cbac44.png)
+<br/><br/>Figura 46 - Resultados modelo 2
+![image](https://user-images.githubusercontent.com/93548287/162081953-705abf19-477a-4603-b081-78a8dda51bdf.png)
+<br/><br/>
+O resultado da otimização com apenas um objetivo (o custo da viga) é apresentado na Figura 47. Note que, para um objetivo o algoritmo naturalmente apresenta apenas uma opção de projeto. Observe que, estão destacados os valores de flecha total e comprimento de armadura dessa opção, esses valores são importantes para serem comparados com os estudos com mais objetivos.
+ <br/><br/>Figura 47 - Resultado para um objetivo
+ ![image](https://user-images.githubusercontent.com/93548287/162081991-070ff81c-38cb-4430-824d-629e9be2adad.png)
+  <br/><br/>
+A otimização com duplo objetivo, por sua vez, apresenta um conjunto de soluções ideais com a formação da Frente Ideal de Pareto. A Figura 48 mostra a essa frente ideal, o gráfico tem a flecha total representada no eixo vertical e o custo da viga no eixo horizontal. Como esperado, não existe nenhuma solução na frente ideal que seja superada em ambos os objetivos por uma outra solução.
+ <br/><br/>Figura 48 - Frente de Pareto objetivo duplo com 10 gerações
+![image](https://user-images.githubusercontent.com/93548287/162082003-4f9ef10e-da38-4585-8323-b76f820b9626.png)
+  <br/><br/>
+Observe que, o estudo com objetivo duplo apresentou a maioria das soluções mais custosas que o estudo com um único objetivo, porém estas soluções apresentam uma flecha total menor. Esse comportamento é esperado uma vez que, a otimização de objetivo único está comprometida apenas com o custo, portanto entrega resultados melhores deste avaliador. 
+O estudo foi repetido com 20 (Figura 49) e 40 gerações (Figura 50), desse modo, o estudo permite a exploração de opções de projeto melhores e com menores valores de custo e flecha total. Além disso, um maior número de gerações vai formar uma Frente de Pareto mais clara. 
+ <br/><br/>Figura 49 - Frente de Pareto objetivo duplo com 20 gerações
+ ![image](https://user-images.githubusercontent.com/93548287/162082010-3d975d24-795e-4d9e-b95a-5bf2c2171f44.png)
+ <br/><br/>Figura 50 - Frente de Pareto objetivo duplo com 40 gerações
+ ![image](https://user-images.githubusercontent.com/93548287/162082014-97f9bd7f-25dc-4589-99ed-fcfbb41a9e04.png)
+  <br/><br/>
+O estudo de objetivo triplo deve apresentar uma Frente de Pareto no espaço tridimensional, neste, além dos eixos verticais e horizontais representarem flecha e o custo, a cor dos pontos indica o comprimento total de armadura longitudinal utilizado, como na Figura 51. Onde, as cores vermelhas representam comprimento total mais curto, enquanto as cores laranja, roxo, verde e azul, nessa ordem, são opções com maior comprimento.<br/>
+O gráfico da Figura 51, tem alguns formatos de Fronteiras de Pareto, estas são fronteiras ideais de diferentes regiões do espaço de projeto.  Esse efeito é causado devido a tridimensionalidade dos objetivos e a presença de alguma descontinuidade.<br/>
+O gráfico da Figura 52 é semelhante ao anterior, no entanto, a cor dos pontos representa o diâmetro da armadura. Nota-se que cada uma das frentes ideais tem soluções com diâmetros diferentes de barras. Isto aponta que a descontinuidade ocorre na mudança de diâmetro de uma barra para outra.
+ <br/><br/>Figura 51 - Frente ideal de objetivo triplo.
+ ![image](https://user-images.githubusercontent.com/93548287/162082040-450a1d25-f631-4c1b-a27d-acf315b173d7.png)
+  <br/><br/>Figura 52 - Frente ideal de objetivo triplo relação com diâmetros
+![image](https://user-images.githubusercontent.com/93548287/162082970-cdb411a7-ff9d-4163-8a3c-20fc04380541.png)
+  <br/><br/>
+Depois da exploração das opções de projeto pelo projetista, ele deve integrar a opção escolhida ao restante do modelo. Para isso, basta selecionar a opção desejada e clicar no botão ‘Criar elementos do Revit’. Esse botão pode ser visto nas Figuras 46 e 47, na parte inferior a direita. Então o Generative Design importa para o modelo a viga selecionada como na Figura 53.
+ <br/><br/>Figura 53 - Integração da opção de projeto no modelo
+ ![image](https://user-images.githubusercontent.com/93548287/162082990-bd064d79-ac0c-4823-b990-66a1255fe670.png)
+  <br/><br/>
+  
+### Exploração do espaço de projeto por diferentes solucionadores
+Neste subcapitulo será discutido como os diferentes solucionadores genéticos do Generative Design exploram o espaço de projeto aplicados a viga V2. Os gráficos deste capítulo são construídos com eixo vertical referente a porcentagem da altura da viga e horizontal e eixo horizontal ao f_ck do concreto. <br/>
+Cada solucionador ou método irá explorar o espaço de projeto de formas diferentes. <br/>
+O método de ‘Randomizar’ vai explorar todo espaço de projeto de forma aleatória. Note que, os eixos de altura e de f_ck compreendem todo o espaço de projeto e a distribuição de pontos é aleatória, Figura 54. <br/>
+<br/><br/>Figura 54 - Espaço de projeto do Método Randomizar
+ ![image](https://user-images.githubusercontent.com/93548287/162083240-fe869e7c-5bd6-4fb3-b4e3-c70f4b9c0487.png)
+<br/><br/>
+Já o método ‘Curtir isso’, cria opções de projetos semelhantes a uma opção inicial que o projetista já gosta. Para esse exemplo foi atribuído um valor aleatório inicial para os parâmetros de altura e f_ck: 0,8 e 25 Mpa respectivamente. Neste caso, as opções estão concentradas numa região do espaço de projeto, o f_ck só varia em 3 valores e a porcentagem de altura varia num intervalo limitado no espaço de projeto, como na Figura 55.
+<br/><br/>Figura 55 - Espaço de projeto do Método Curtir isso
+ ![image](https://user-images.githubusercontent.com/93548287/162083247-98cd9572-2d83-4c64-8b5f-654f4b2ce2c4.png)
+<br/><br/>
+O método de Otimização também retorna opções pouco dispersas no espaço de projeto, no entanto este método vai escolher de forma inteligente as regiões ótimas. Neste gráfico os eixos também estão limitados, Figura 56, no entanto, diferente do método anterior, o algoritmo genético escolheu a região que irá se concentrar, por exemplo, procura valores de f_ck mais altos. Vale destacar que a otimização embora teste 200 opções de projetos, somente 13 opções foram consideradas ideais e pertencem a solução deste método.
+<br/><br/>Figura 56 - Espaço de projeto da otimização
+ ![image](https://user-images.githubusercontent.com/93548287/162083263-ff58714d-98d0-4f79-aa7f-5086b0c43a8c.png)
+<br/><br/>
+Por fim, o produto transversal explora todo espaço de projeto e dispersa as opções de projeto de forma padronizada e equidistantes como na Figura 57. Uma vez que o espaço de projeto definido no item 3.2.1 é muito grande, para tornar esse método exequível, o estudo aumentou o passo das variáveis e algumas delas foram transformadas em constantes.
+<br/><br/>Figura 57 - Espaço de projeto do produto transversal
+ ![image](https://user-images.githubusercontent.com/93548287/162083276-aa2153b6-9e8f-41c5-b01d-1f931e0020ac.png)
+<br/><br/>
+
 
 ## Ferramentas
 
