@@ -1,9 +1,21 @@
 # Uso do projeto generativo como ferramenta de busca de soluções de projeto
 
+em poucas palavras e de forma simples explicar alguns conceitos importantes para entender este trabalho  
+
 ## Navegação
 
+- [Ir para Conceitos](#conceitos)
 - [Ir para Resumo](#resumo)
 - [Ir para Abstract](#abstract)
+
+## Conceitos
+**O que é Projeto Generativo?** <br/>
+É a utilização de Algoritmos Evolutivos, e em especial Algoritmos Genéticos, como método de criação de soluções de projeto.
+**O que são Algoritmos Genéticos?**
+Como ferramenta de busca os Algoritmos Genéticos procura entre as opções de projeto, aqueles que melhor performam frente aos objetivos do projeto. Esse algoritmo de busca é inspirado nas teorias da Evolução das Espécies proposta por Darwin.
+**Que tipo de projeto é aplicavél o projeto generativo?**
+Usualmente projetos multiobjetivo. Em especial esse trabalho é aplicado a projeto de vigas de concreto armado. Pois naturalmente, propostas de estruturas de concreto armado envolvem problemas multiobjetivos, pois, devem apresentar uma solução adequada a arquitetura, ao mesmo tempo que atenda aos estados limites e minimize custos. Muitas vezes estes objetivos são conflitantes entre si, complicando a tarefa de escolher a melhor solução. Neste sentido o Projeto Generativo pode ser uma eficiente ferramenta auxiliar na exploração de opções de projeto na área de estruturas.
+
 
 ## Resumo
 No contexto de avanço de métodos de automação e otimização de projetos, este trabalho dedica-se a avaliar o uso do projeto generativo como ferramenta de busca de soluções de projeto aplicado a vigas de concreto armado. Para tanto, apresenta conceitos básicos presentes no projeto generativo como o algoritmo genético, projeto computacional, otimização multiobjetivo e integração com o BIM. Em seguida, são detalhadas as condições do exemplo de aplicação, este, é desenvolvido para projetos no Revit, cujo projeto computacional é desenvolvida no Dynamo. O projeto computacional gera uma viga de concreto armado a partir de informações do Revit, e então avalia algumas de suas propriedades como custo, deslocamento vertical e comprimento da armadura. Por isso, o projeto computacional é dividido em estrutura de entrada, algoritmo gerador, algoritmo avaliador e estrutura de saída. O projeto generativo gerou os resultados esperados, operou corretamente com o projeto do Revit, desenhou a Fronteira de Pareto e explorou o espaço de projeto de acordo com a proposta de cada solucionador. Portanto, atestando o correto funcionamento da estrutura computacional paramétrica e constatando o desempenho do projeto generativo como ferramenta de busca de soluções de projeto.
