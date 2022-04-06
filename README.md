@@ -1,12 +1,22 @@
 # Uso do projeto generativo como ferramenta de busca de soluções de projeto
 
-Na seção de conceitos explico em poucas palavras o básico de alguns conceitos importantes para entender os desafios deste trabalho  
+Olá!😆 Seja Bem vindo ao repositório do programa (ou projeto computacional) do meu Trabalho de Conclusão de Curso.🎓 <br/>
+É um prazer tê-lo(a) aqui,🥰 este readme é feito com todo o carinho para você se situar neste trabalho.<br/>
+Na seção de conceitos explico em poucas palavras o básico de alguns conceitos importantes para entender os desafios deste trabalho, é pouca coisa dá uma conferida.😉 <br/>
+Em seguida conheça o Resumo e o Abstract do trabalho para ter uma visão mais geral. <br/>
+Então conheça um pouco como o projeto funciona, aqui você vai ver prints dele funcionando passo-a-passo dos comandos e os resultados.<br/>
+Conheça um breve resumo das linguagens utilizadas na seção Ferramentas. <br/>
+Por fim entenda a estrutura do código principal em dynamo.<br/>
+Navegue pelo readme na seção a baixo.
 
 ## Navegação
 
 - [Ir para Conceitos](#conceitos)
 - [Ir para Resumo](#resumo)
 - [Ir para Abstract](#abstract)
+- [Ir para Projeto](#projeto)
+- [Ir para Ferramentas](#ferramentas)
+- [Ir para Algoritmo](#o-algoritmo)
 
 ## Conceitos
 #### **O que é Projeto Generativo?**
