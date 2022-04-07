@@ -1,0 +1,11 @@
+Ac = b*h;
+Af = b+2*h;
+Pp =b*h*25*L;
+complong = f-i;
+comptlong = Sum(complong);
+comptransv = Curve.Length(estribos);
+compttransv = Sum(comptransv);
+p1 = comptlong*RSCA50[idlong-3];
+p2 = compttransv*RSCA60[idest];
+p3 = b*h*L*RSconc[ifck/5-4];
+preço = p1+p2+p3;

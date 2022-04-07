@@ -1,0 +1,9 @@
+dl = c/100.0+dest/1000.0+dlong/2*1.04/1000.0;
+ys = [-bw/2+dl,bw/2-dl];
+zs = [h/2-dl,h/2-dl];
+zi = [-h/2+dl,-h/2+dl];
+py=List.Join([IN[0][0], ys , IN[2][0], ys, IN[1][0], ys]);
+pz=List.Join([IN[0][1], zs , IN[2][1], zi, IN[1][1], zi]);
+pxi=INx[0];
+pxf=INx[1];
+check = [[IN[0][5], IN[1][5], IN[2][5]], [IN[0][3], IN[1][3], IN[2][3]], [IN[0][6], IN[1][6], IN[2][6]], [IN[0][7], IN[1][7], IN[2][7]], checkf[2] ,checkf[1]];
