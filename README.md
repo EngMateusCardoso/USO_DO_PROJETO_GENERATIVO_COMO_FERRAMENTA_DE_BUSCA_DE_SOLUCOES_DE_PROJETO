@@ -6,7 +6,7 @@ Olá!😆 Seja Bem vindo ao repositório do programa (ou projeto computacional) 
 Na seção de conceitos explico em poucas palavras o básico de alguns conceitos importantes para entender os desafios deste trabalho, é pouca coisa dá uma conferida.😉 <br/>
 Em seguida conheça o Resumo e o Abstract do trabalho para ter uma visão mais geral. (Se você está com pressa pode pular essa parte!)<br/>
 A seção de Projetos é a parte interessante, conheça um pouco como o projeto funciona, la você vai ver prints dele funcionando passo-a-passo dos comandos e os resultados. (está com muita pressa pula direto para lá!)<br/>
-Tá, mas se você quer conhecer as linguagens que usei em Ferramentas en contrará um breve resumo. <br/>
+Tá, mas se você quer um breve resumo sobre o *Dynamo* e *Generative Design* contrará em Ferramentas. <br/>
 Por fim, para entender a estrutura lógica do código principal em dynamo visite a última seção.<br/>
 **Sobre esse repositório** <br/>
 Na pasta de */Códigos* estão o arquivo principal (.dyn) em Dynamo e os arquivos pyhton e C# que complementam o arquivo principal. <br/>
@@ -134,7 +134,17 @@ Por fim, o produto transversal explora todo espaço de projeto e dispersa as op�
  ![image](https://user-images.githubusercontent.com/93548287/162083276-aa2153b6-9e8f-41c5-b01d-1f931e0020ac.png)
 <br/><br/>
 
-
 ## Ferramentas
+
+###	Generative Design for Revit
+
+Generative Design for Revit é um novo recurso disponível na versão do Revit 2021. Este recurso facilita a execução de projetos generativos no ambiente do Revit. <br/>
+Smith (2020) destaca “O Generative Design for Revit também permite que alguém que não tenha experiência com o Dynamo use fluxos de trabalho de projeto generativo, uma vez que executa scripts já criados diretamente da interface do Revit.” <br/>
+
+### Dynamo for Revit
+
+O Dynamo for Revit é um aplicativo de programação visual de código aberto, conectado ao Revit. Nele, através de sua interface gráfica o projetista ou programador conecta ‘nós’ de comando, criando a lógica de programação. Os nós são os objetos que executam tarefas especificas. A conexão entre eles é feita pelos ‘fios’, eles determinam a relação entre nós criando um fluxo que usualmente ocorre da esquerda para direita. A lógica de programação visual expressa pelos nós conectados por fios é chamada de gráfico.
+
+*(no relatório presente no repositório temos mais detalhes sobre o Dynamo, Generative Design e a presença de Python e C# no projeto)*
 
 ## O Algoritmo
