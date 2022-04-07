@@ -1,13 +1,18 @@
 # Uso do projeto generativo como ferramenta de busca de soluções de projeto
 
 Olá!😆 Seja Bem vindo ao repositório do programa (ou projeto computacional) do meu Trabalho de Conclusão de Curso.🎓 <br/>
-É um prazer tê-lo(a) aqui,🥰 este readme é feito com todo o carinho para você se situar neste trabalho.<br/>
+É um prazer tê-lo(a) aqui,🥰 este readme é feito com todo o carinho para você se situar neste trabalho, vou me permitir uma linguagem mais informal em algumas seções deste readme para deixa o conteudo mais leve.<br/>
+**Sobre as seções deste readme**<br/>
 Na seção de conceitos explico em poucas palavras o básico de alguns conceitos importantes para entender os desafios deste trabalho, é pouca coisa dá uma conferida.😉 <br/>
-Em seguida conheça o Resumo e o Abstract do trabalho para ter uma visão mais geral. <br/>
-Então conheça um pouco como o projeto funciona, aqui você vai ver prints dele funcionando passo-a-passo dos comandos e os resultados.<br/>
-Conheça um breve resumo das linguagens utilizadas na seção Ferramentas. <br/>
-Por fim entenda a estrutura do código principal em dynamo.<br/>
-Navegue pelo readme na seção a baixo.
+Em seguida conheça o Resumo e o Abstract do trabalho para ter uma visão mais geral. (Se você está com pressa pode pular essa parte!)<br/>
+A seção de Projetos é a parte interessante, conheça um pouco como o projeto funciona, la você vai ver prints dele funcionando passo-a-passo dos comandos e os resultados. (está com muita pressa pula direto para lá!)<br/>
+Tá, mas se você quer conhecer as linguagens que usei em Ferramentas en contrará um breve resumo. <br/>
+Por fim, para entender a estrutura lógica do código principal em dynamo visite a última seção.<br/>
+**Sobre esse repositório** <br/>
+Na pasta de */Códigos* estão o arquivo principal (.dyn) em Dynamo e os arquivos pyhton e C# que complementam o arquivo principal. <br/>
+Na pasta de */Modelos* estão os arquivos do projeto em .rvt e as solicitações em excel usados na demonstração do relatório e deste redme. <br/>
+Então na pasta de *\Relatório e Apresentação* está meu relatório final e ppt da apresentação. (Em breve adiciono o vídeo d apresentação também) <br/>
+**_Navegue pelo readme na seção a baixo._**
 
 ## Navegação
 
