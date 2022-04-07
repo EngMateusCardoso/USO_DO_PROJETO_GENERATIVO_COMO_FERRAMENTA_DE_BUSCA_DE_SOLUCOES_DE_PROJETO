@@ -148,3 +148,86 @@ O Dynamo for Revit é um aplicativo de programação visual de código aberto, c
 *(no relatório presente no repositório temos mais detalhes sobre o Dynamo, Generative Design e a presença de Python e C# no projeto)*
 
 ## O Algoritmo
+
+A estrutura paramétrica é a lógica que direciona a geração e avaliação das opções de vigas. Neste projeto ela foi desenvolvida no Dynamo for Revit. <br/>
+O Dynamo for Revit é um aplicativo de programação visual de código aberto conectado ao Revit. Nele, através de sua interface gráfica o projetista ou programador conecta ‘nós’ de comando, criando a lógica de programação. Os nós são os objetos que executam tarefas especificas. A conexão entre eles é feita pelos ‘fios’, eles determinam a relação entre nós criando um fluxo que usualmente ocorre da esquerda para direita. A lógica de programação visual expressa pelos nós conectados por fios é chamada de gráfico. <br/>
+O gráfico da estrutura paramétrica desenvolvida pode ser dividido em quatro estruturas principais como na Figura 23, são elas: a estrutura de entradas que recebe os dados do Revit e Excel que irão alimentar o gerador; o gerador e avaliador cuja funções já foram discutidas no item 2.3; por fim, as saídas que exportam a opção de projeto de volta para o Revit.
+<br/><br/>Figura 23 - Gráfico da estrutura paramétrica<br/>
+![image](https://user-images.githubusercontent.com/93548287/162117745-79ab5060-ca56-451f-b4c0-585459469a61.png)
+<br/><br/>
+### Estrutura de entrada
+As estruturas de entrada têm o objetivo de importar algum dado de um outro ambiente. Seja informações do projeto no Revit, de uma planilha Excel ou os valores das variáveis de projeto.<br/>
+As estruturas de entrada foram divididas em quatro grupos: informações da viga, restrições, importação do Excel e as variáveis de projeto. <br/>
+A entrada de importação das informações da viga inicia-se com o nó que seleciona a viga no Revit. Este nó é uma variável de estudo, portanto deve ser marcado como ‘de entrada’. Este grupo tem o objetivo de identificar na viga estudada, o seu nome, comprimento e localização.
+<br/><br/>Figura 25 - Importação de dados da viga no Revit<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162118159-47e023f9-3afb-4c7d-9f5d-74cc7f9db964.png)
+<br/>
+Observe pela geometria 3D do projeto, na Figura 21, que a viga não pode adotar qualquer valor de largura ou altura. Pois, a sua largura pode ser limitada pela espessura da parede ou do pilar, já a altura é limitada pelo limite superior da porta ou janela. Essas são as restrições do projeto.<br/>
+Por isso, no grupo de restrição, o projetista seleciona as faces dos limites horizontal (de largura) e vertical (de altura), Figura 26. Em seguida, o código calcula as distâncias entre as faces e as transmite para as variáveis de projeto, para que estas controlem a geração para dentro dos limites.<br/>
+Os nós de seleção de face vão variar para cada estudo, desse modo, esses nós devem ser configurados como ‘de entrada’.
+<br/><br/>Figura 26 - Importação das restrições<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162118164-88525b23-2e59-4281-b2ff-a9ba4e558f54.png)
+<br/><br/>
+Para a importação da planilha de Excel basta selecionar o local do arquivo. Então, o nó Data.ImportExcel, Figura 27, converte os dados do arquivo Excel em uma lista. Neste caso, não é necessário definir nenhum nó como ‘de entrada’, uma vez que os dados da planilha são fixos.
+<br/><br/>Figura 27 - importação do Excel<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162118173-22600915-f374-45ea-a8f2-2a09c1bea1b1.png)
+<br/><br/>
+Por fim, o grupo que importam as variáveis do projeto que também podem ser entendidas como as entradas do algoritmo gerador. Vale destacar que os nós variáveis de projeto devem necessariamente ser nós de controle deslizante e marcados como ‘de entrada’.<br/>
+Nós de controle deslizantes são configurados com um valor mínimo, um valor máximo e o passo entre eles. O exemplo da Figura 28 expressa os valores de resistência característica do concreto, contemplando as resistências de: 20, 25, 30, 35, 40 e 45 Mpa.
+<br/><br/>Figura 28 - Anatomia de um nó de controle deslizante<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162118188-134240ba-13a1-462e-940e-d1a4e6e5787c.png)
+<br/><br/>
+Note que, cada um destes nós de entrada do algoritmo gerador vai funcionar como um gen do AG, juntos são a representação cromossomial do projeto. Portando são eles que serão randomizados, combinados e evoluídos.<br/>
+Neste estudo os parâmetros são: a base, altura, resistência característica do concreto, diâmetro da armadura longitudinal e transversal.<br/>
+Neste caso, foram forçados alguns limites para os nós deslizantes devido a restrições do sistema. O bloco de código a esquerda limita a largura e altura pelas restrições arquitetônicas. Já o bloco de código abaixo faz o slide do diâmetro da armadura passear sobre as opções comerciais de diâmetro, Figura 29.
+<br/><br/>Figura 29 - Representação cromossomial<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162118201-8543fd78-6d40-4db6-8358-0452a100f555.png)
+<br/><br/>
+Observe que, neste ponto, o espaço de projeto está definido, uma vez que estão definidos os parâmetros de entrada. Afinal, como exposto anteriormente o espaço de projeto é a combinação dos valores dos parâmetros de entrada.
+
+### Algoritmo Gerador
+
+Em posse dos dados importados, o algoritmo gerador deve criar as opções projeto, neste caso, o cálculo da armadura e a sua representação geométrica.<br/>
+O primeiro passo é calcular as cargas e solicitações na viga, essa estrutura é dividida em dois blocos de códigos, Figura 30. O primeiro bloco do código extrai da lista importada do Excel o valor das cargas e adiciona o peso próprio do elemento. O segundo calcula as reações, cortante máximo e o momento máximo positivo.
+<br/><br/>Figura 30 - Cargas e solicitações<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162123195-877f4cc4-2f40-479a-88ae-dd9b1d8c8151.png)
+<br/><br/>
+Em seguida, o algoritmo gerador é encaminhado para o nó personalizado de cálculo da armadura da viga. As entradas deste nó são os dados de geometria e propriedades da viga e suas saídas são as informações de armadura.<br/>
+ O nó personalizado é um nó cujas operações foram definidas pelo projetista. Ele basicamente condensa em um nó um gráfico do Dynamo, como na Figura 31. O nó personalizado é útil para deixar a operação mais clara e organizada.
+<br/><br/>Figura 31 - Nó personalizado de dimensionamento<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162123204-93909b88-cd87-48de-ac55-eb11a844f50a.png)
+<br/><br/>
+As entradas e saídas deste nó personalizado, são as entradas e saídas do gráfico que ele resume. Veja na Figura 31, do lado esquerdo o nó personalizado com suas portas de entrada e saída e no lado direito o gráfico que ele executa.<br/>
+Note que, esse gráfico é composto principalmente por nós de script em Python. O Python é uma linguagem de programação textual muito popular por ser de fácil leitura e aprendizagem. Os nós do Python adicionam linguagem textual aos nós do Dynamo. A linguagem textual é mais simples para executar comandos condicionais e loops presentes no código de dimensionamento.<br/>
+No gráfico, têm se três principais nós de scripts Pyhton: o nó de cálculo da armadura da seção transversal, comprimentos de ancoragem e armadura transversal. Desse modo, o nó personalizado retorna as coordenadas dos pontos inicial e final das barras de armadura longitudinal e a geometria da armadura transversal.<br/>
+Por fim, o código que cria a visualização da geometria, Figura 32. Dividido em dois blocos de código, um deles ajustas os pontos iniciais e finais que irão gerar as barras o outro cria os sólidos: um retângulo para a viga e cilindros para as barras.
+<br/><br/>Figura 32 - Visualização da geometria<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162123222-b1bacbe6-40c1-4072-ae96-2673039fabf7.png)
+<br/><br/>
+
+### Algoritmo Avaliador 
+
+O algoritmo avaliador mensura os objetivos e as restrições entregando o resultado numericamente. O resultado deve ser encaminhado para um nó watch e marcado como ‘de saída’ como na Figura 33.
+<br/><br/>Figura 33 - Nó de saída<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162123326-ba6e17b5-c653-418b-96a3-21c6688b6b73.png)
+<br/><br/>
+O grupo que avalia os objetivos está detalhado na Figura 34. O bloco de código calcula os objetivos do problema, são eles: a área da seção transversal de concreto, Ac em m²; a área de forma da viga em m²; o peso próprio da viga, Pp em kN; o comprimento da armadura longitudinal e transversal em m; e o custo da viga em reais. Em seguida, o resultado é encaminhado para os nós watch de saída.
+<br/><br/>Figura 34 - Objetivos<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162123335-67bd8ab8-b7fe-41e0-b8b2-e432cbdf39c8.png)
+<br/><br/>
+Além da análise dos objetivos a outra função importante deste algoritmo é a avaliação das restrições. Neste projeto, pode-se entender as verificações da NBR 6118 (2014) como restrições, são elas: verificações do estado limite de serviço, de consideração de armadura concentrada, de esmagamento da biela de concreto, altura útil mínima, altura mínima da linha neutra e área de aço máxima e mínima.<br/>
+Para as verificações do estado limite de serviço é calculado: a abertura máxima de fissuras características, a deformação excessiva imediata e deferida com o tempo, respectivamente w_k, a e a_t em metros. O nó de script Python, Figura 35 realiza o cálculo destas medidas e passa para os nós de saída.
+<br/><br/>Figura 35 - Verificações do ELS<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162123456-2eca1b9f-6d39-4f2d-abee-0bdd72dc5159.png)
+<br/><br/>
+ ### Algoritmo de Saída e interoperabilidade
+ A estrutura de saída é composta pelos grupos que retornam para o Revit a opção de viga selecionada na etapa de exploração. Onde, o bloco de código da Figura 36, insere a viga no projeto e configura seus parâmetros de tipo e de instancia. Nos parâmetros de tipo são configurados, a base, altura e custo, já nos parâmetros de instancia, os cobrimentos da peça. 
+<br/><br/>Figura 36 - Configuração da saída<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162123742-034f727f-3b72-45a1-9c52-6b6cad32b791.png)
+<br/><br/>
+Em seguida, o grupo de nós que exporta a geometria das armaduras para as vigas no Revit. Essa estrutura é construída principalmente de nós da Biblioteca do Dynamo for Rebar específicos para esse tipo de operação. Observe a estrutura de inserção das armaduras na Figura 37.
+<br/><br/>Figura 37 - Inserção das armaduras<br/>
+ ![image](https://user-images.githubusercontent.com/93548287/162123734-2725bdab-d258-4554-88b8-3310c05556c1.png)
+<br/><br/>
+Como visto, a estrutura computacional desenvolvida é composta de códigos de importação e exportação de dados no Revit. No entanto, esse fluxo de dados entre Dynamo e Revit exige um alto esforço computacional quando sujeito ao processo iterativo do projeto generativo.
+
